@@ -1,5 +1,5 @@
 /**
- * Happy Birthday ANIK - Main Application Script
+ * Happy Birthday ANIK - Main Interactive Application Script
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnClickNow = document.getElementById('btn-click-now');
 
   const musicToggle = document.getElementById('music-toggle');
-  const bgMusic = document.getElementById('bg-music');
   const musicIcon = document.getElementById('music-icon');
 
   const CORRECT_PASSWORD = '0894';
@@ -32,66 +31,122 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       toPage.classList.remove('hidden');
       toPage.classList.add('active');
-    }, 150);
+    }, 180);
   }
 
-  // --- Audio Management ---
+  // --- Web Audio Synthesizer for Soft Gentle Background Music ---
+  let audioCtx = null;
   let isPlaying = false;
+  let musicInterval = null;
 
-  function initAudio() {
-    musicToggle.classList.remove('hidden');
-    bgMusic.volume = 0.5;
+  function createSoftTone(freq, duration, type = 'sine', gainVal = 0.08) {
+    if (!audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
 
-    // Play attempt
-    bgMusic.play().then(() => {
-      isPlaying = true;
-      musicToggle.classList.add('playing');
-      musicIcon.textContent = '🎵';
-    }).catch(() => {
-      isPlaying = false;
-      musicToggle.classList.remove('playing');
-      musicIcon.textContent = '🔇';
-    });
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(gainVal, audioCtx.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      console.log('Audio note error:', e);
+    }
   }
 
-  musicToggle.addEventListener('click', () => {
+  function playMelodySequence() {
+    if (!isPlaying || !audioCtx) return;
+
+    // Gentle pentatonic lullaby melody notes (frequencies in Hz)
+    const melody = [
+      { f: 523.25, d: 0.8 }, // C5
+      { f: 659.25, d: 0.8 }, // E5
+      { f: 783.99, d: 1.0 }, // G5
+      { f: 880.00, d: 0.8 }, // A5
+      { f: 783.99, d: 1.2 }, // G5
+      { f: 659.25, d: 0.8 }, // E5
+      { f: 587.33, d: 0.8 }, // D5
+      { f: 523.25, d: 1.5 }  // C5
+    ];
+
+    let step = 0;
+    if (musicInterval) clearInterval(musicInterval);
+
+    musicInterval = setInterval(() => {
+      if (!isPlaying) {
+        clearInterval(musicInterval);
+        return;
+      }
+      const note = melody[step % melody.length];
+      createSoftTone(note.f, note.d, 'sine', 0.06);
+      // Soft harmony note
+      if (step % 2 === 0) {
+        createSoftTone(note.f / 2, note.d * 1.2, 'triangle', 0.03);
+      }
+      step++;
+    }, 700);
+  }
+
+  function toggleMusicState() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        audioCtx = new AudioContext();
+      }
+    }
+
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
     if (isPlaying) {
-      bgMusic.pause();
       isPlaying = false;
+      if (musicInterval) clearInterval(musicInterval);
       musicToggle.classList.remove('playing');
       musicIcon.textContent = '🔇';
     } else {
-      bgMusic.play().then(() => {
-        isPlaying = true;
-        musicToggle.classList.add('playing');
-        musicIcon.textContent = '🎵';
-      }).catch(err => console.log('Audio playback info:', err));
+      isPlaying = true;
+      musicToggle.classList.add('playing');
+      musicIcon.textContent = '🎵';
+      playMelodySequence();
     }
-  });
+  }
+
+  musicToggle.addEventListener('click', toggleMusicState);
 
   // --- Event Listeners ---
 
-  // Page 1 -> Page 2
+  // Screen 1 -> Screen 2
   btnOpen.addEventListener('click', () => {
-    initAudio();
+    musicToggle.classList.remove('hidden');
+    toggleMusicState();
     goToPage(page1, page2);
   });
 
-  // Page 2: NO button -> Nothing happens
+  // Screen 2: NO button -> NO operation (stay on same screen, no alert, no action)
   btnNo.addEventListener('click', (e) => {
     e.preventDefault();
-    // Do nothing as requested
+    e.stopPropagation();
+    // Absolutely nothing happens
   });
 
-  // Page 2: YES button -> Page 3
+  // Screen 2: YES button -> Screen 3
   btnYes.addEventListener('click', () => {
     goToPage(page2, page3);
     setTimeout(() => {
       passwordInput.focus();
-    }, 400);
+    }, 350);
   });
 
-  // Page 3: Password verification
+  // Screen 3: Password verification
   passwordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const entered = passwordInput.value.trim();
@@ -102,7 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
       triggerBirthdayConfetti();
     } else {
       passwordError.classList.remove('hidden');
-      // Trigger re-animation
       passwordError.style.animation = 'none';
       passwordError.offsetHeight; // Reflow
       passwordError.style.animation = 'shake 0.4s ease-in-out';
@@ -111,14 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Page 4 -> Page 5
+  // Screen 4 -> Screen 5
   btnClickNow.addEventListener('click', () => {
     goToPage(page4, page5);
     triggerBirthdayConfetti();
   });
 
   // ==========================================================================
-  // BACKGROUND PARTICLES CANVAS (Floating Hearts, Stars & Rose Petals)
+  // BACKGROUND PARTICLES CANVAS (Floating Hearts, Stars, Sparkles & Rose Petals)
   // ==========================================================================
   const pCanvas = document.getElementById('particles-canvas');
   const pCtx = pCanvas.getContext('2d');
@@ -142,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     reset() {
       this.x = Math.random() * width;
       this.y = height + Math.random() * 20;
-      this.size = Math.random() * 16 + 10; // Font size in px
+      this.size = Math.random() * 16 + 10;
       this.speedY = Math.random() * 1.5 + 0.5;
       this.speedX = Math.sin(Math.random() * Math.PI) * 0.8;
       this.opacity = Math.random() * 0.7 + 0.3;
@@ -178,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const maxParticles = Math.min(Math.floor(width / 20), 40);
   for (let i = 0; i < maxParticles; i++) {
     const p = new Particle();
-    p.y = Math.random() * height; // initial spread
+    p.y = Math.random() * height;
     particles.push(p);
   }
 
