@@ -1,0 +1,514 @@
+/* ==========================================================================
+   Happy Birthday ANIK - Stylesheet
+   ========================================================================== */
+
+/* --- CSS Variables --- */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0d0614 0%, #1a0b2e 40%, #2b0826 70%, #150518 100%);
+  --primary-color: #ff3366;
+  --primary-glow: rgba(255, 51, 102, 0.6);
+  --primary-hover: #ff4d79;
+  --accent-gold: #ffd700;
+  --text-light: #ffffff;
+  --text-dim: #f0c3d4;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-bangla: 'Hind Siliguri', 'Poppins', sans-serif;
+  --font-accent: 'Caveat', cursive;
+  --transition-speed: 0.5s;
+}
+
+/* --- Global Reset & Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-gradient);
+  font-family: var(--font-main);
+  color: var(--text-light);
+  position: relative;
+}
+
+/* --- Canvas Animations Background --- */
+#particles-canvas,
+#confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#confetti-canvas {
+  z-index: 99;
+}
+
+/* --- Music Control Floating Button --- */
+.music-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.music-toggle-btn.playing {
+  animation: pulse-music 2s infinite ease-in-out;
+}
+
+@keyframes pulse-music {
+  0%, 100% { box-shadow: 0 0 10px var(--primary-glow); }
+  50% { box-shadow: 0 0 22px var(--primary-color); }
+}
+
+/* --- Main Layout & Screen Transitions --- */
+#app-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.page-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed);
+}
+
+.page-screen.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.page-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bangla-font {
+  font-family: var(--font-bangla);
+}
+
+/* --- Buttons Styles --- */
+.btn-primary {
+  background: linear-gradient(135deg, #ff3366 0%, #ff5e62 100%);
+  color: #ffffff;
+  border: none;
+  padding: 16px 42px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(255, 51, 102, 0.6);
+}
+
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid var(--glass-border);
+  padding: 16px 42px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.glow-effect {
+  animation: glowing-btn 2.5s infinite;
+}
+
+@keyframes glowing-btn {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--primary-glow), 0 0 40px rgba(255, 51, 102, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px var(--primary-glow), 0 0 60px rgba(255, 51, 102, 0.6);
+  }
+}
+
+.pulse-btn {
+  animation: pulse-anim 2s infinite ease-in-out;
+}
+
+@keyframes pulse-anim {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* --- PAGE 1: OPEN SURPRISE --- */
+.open-btn {
+  font-size: 1.8rem;
+  padding: 22px 64px;
+  border-radius: 60px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* --- Glass Card Containers (Pages 2 & 3) --- */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 28px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 440px;
+  text-align: center;
+}
+
+/* --- PAGE 2: YOU ARE MC --- */
+.heading-mc {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0c3d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 20px rgba(255, 51, 102, 0.3);
+}
+
+.btn-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-group button {
+  flex: 1;
+  max-width: 140px;
+}
+
+/* --- PAGE 3: PASSWORD --- */
+.lock-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+}
+
+.heading-sub {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-dim);
+}
+
+#password-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+#password-input {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.5rem;
+  letter-spacing: 8px;
+  text-align: center;
+  border-radius: 16px;
+  border: 2px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#password-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-glow);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#password-input::placeholder {
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.error-msg {
+  color: #ff4d4d;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+#btn-password-submit {
+  width: 100%;
+  padding: 16px;
+}
+
+/* --- PAGE 4: BIRTHDAY REVEAL --- */
+.reveal-container {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.cake-badge {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.reveal-title {
+  font-size: clamp(2.2rem, 8vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #fff 0%, #ffd700 50%, #ff3366 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 15px rgba(255, 51, 102, 0.4));
+}
+
+.glow-text {
+  animation: text-glow 3s infinite alternate;
+}
+
+@keyframes text-glow {
+  from {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)) drop-shadow(0 0 20px rgba(255, 51, 102, 0.4));
+  }
+  to {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 35px rgba(255, 51, 102, 0.8));
+  }
+}
+
+.reveal-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  margin-bottom: 35px;
+  font-weight: 400;
+}
+
+#btn-click-now {
+  font-size: 1.4rem;
+  padding: 18px 48px;
+  letter-spacing: 1px;
+}
+
+/* --- PAGE 5: BIRTHDAY LETTER --- */
+.letter-wrapper {
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 10px 10px 25px 10px;
+  border-radius: 24px;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 51, 102, 0.5) transparent;
+}
+
+.letter-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.letter-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 51, 102, 0.5);
+  border-radius: 10px;
+}
+
+.letter-card {
+  background: rgba(20, 10, 30, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 105, 180, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 51, 102, 0.15);
+  border-radius: 24px;
+  padding: clamp(25px, 6vw, 40px);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff3366, #ffd700, #ff3366);
+}
+
+.letter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  padding-bottom: 12px;
+}
+
+.letter-decoration {
+  font-size: 1.5rem;
+}
+
+.letter-salutation {
+  font-size: clamp(1.5rem, 5vw, 1.8rem);
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.letter-body {
+  font-size: clamp(1rem, 3.8vw, 1.15rem);
+  line-height: 1.8;
+  color: #fce4ec;
+  font-weight: 400;
+}
+
+.letter-body p {
+  margin-bottom: 12px;
+}
+
+.highlight-text {
+  background: rgba(255, 51, 102, 0.15);
+  padding: 10px 14px;
+  border-left: 3px solid var(--primary-color);
+  border-radius: 8px;
+  margin: 14px 0;
+  color: #ffffff;
+}
+
+.letter-footer {
+  margin-top: 25px;
+  text-align: right;
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+  padding-top: 15px;
+}
+
+.letter-signature {
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+/* --- Utility Animations --- */
+.hidden {
+  display: none !important;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .page-screen {
+    padding: 15px;
+  }
+
+  .glass-card {
+    padding: 30px 20px;
+  }
+
+  .open-btn {
+    font-size: 1.5rem;
+    padding: 18px 50px;
+  }
+
+  .heading-mc {
+    font-size: 2rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+  }
+
+  #password-input {
+    font-size: 1.3rem;
+    padding: 14px;
+  }
+}

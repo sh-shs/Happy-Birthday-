@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday ANIK</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Background Particles Canvas -->
+  <canvas id="particles-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Optional Unobtrusive Audio Control Button -->
+  <button id="music-toggle" class="music-toggle-btn hidden" aria-label="Toggle Music">
+    <span id="music-icon">🎵</span>
+  </button>
+
+  <!-- Background Audio (Data URI synthesized gentle ambient tone to guarantee 100% offline static compatibility without 403s) -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=" type="audio/wav">
+  </audio>
+
+  <!-- MAIN APP CONTAINER -->
+  <main id="app-container">
+
+    <!-- PAGE 1: OPEN SURPRISE -->
+    <section id="page-1" class="page-screen active">
+      <div class="screen-content">
+        <button id="btn-open" class="btn-primary open-btn glow-effect">
+          <span>OPEN</span>
+          <div class="btn-sparkle"></div>
+        </button>
+      </div>
+    </section>
+
+    <!-- PAGE 2: YOU ARE MC -->
+    <section id="page-2" class="page-screen hidden">
+      <div class="glass-card flex-center">
+        <h1 class="heading-mc">You are MC</h1>
+        <div class="btn-group">
+          <button id="btn-no" class="btn-secondary">NO</button>
+          <button id="btn-yes" class="btn-primary">YES</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: PASSWORD -->
+    <section id="page-3" class="page-screen hidden">
+      <div class="glass-card flex-center">
+        <div class="lock-icon">🔐</div>
+        <h2 class="heading-sub">Enter Secret Code</h2>
+        <form id="password-form" onsubmit="return false;">
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="password-input"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              placeholder="••••"
+              maxlength="10"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <p id="password-error" class="error-msg hidden">Oops! Wrong password ❤️</p>
+          <button type="submit" id="btn-password-submit" class="btn-primary">Continue</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PAGE 4: BIRTHDAY REVEAL -->
+    <section id="page-4" class="page-screen hidden">
+      <div class="reveal-container flex-center">
+        <div class="cake-badge">🎂✨</div>
+        <h1 class="reveal-title glow-text">Happy Birthday Anik❤🌹</h1>
+        <p class="reveal-subtitle">A special surprise awaits you...</p>
+        <button id="btn-click-now" class="btn-primary pulse-btn bangla-font">
+          ক্লিক নাও
+        </button>
+      </div>
+    </section>
+
+    <!-- PAGE 5: BIRTHDAY LETTER -->
+    <section id="page-5" class="page-screen hidden">
+      <div class="letter-wrapper">
+        <article class="letter-card bangla-font">
+          <div class="letter-header">
+            <span class="letter-decoration">🌹✨</span>
+            <h2 class="letter-salutation">প্রিয় আনিক,</h2>
+          </div>
+
+          <div class="letter-body">
+            <p>আজকের এই বিশেষ দিনে তোকে জানাই জন্মদিনের অনেক অনেক শুভেচ্ছা ও ভালোবাসা। ❤️</p>
+
+            <p>তোর জীবনের প্রতিটি দিন যেন আনন্দ, সফলতা আর সুন্দর মুহূর্তে ভরে ওঠে। তোর সব স্বপ্ন পূরণ হোক, জীবনের প্রতিটি পথে তুই সফল হোস এবং সবসময় হাসিখুশি থাকিস।</p>
+
+            <p>তুই শুধু একজন বন্ধু না, তুই আমার কাছে ভাইয়ের মতো। জীবনের সুন্দর মুহূর্তগুলোতে যেমন পাশে ছিলি, তেমনি ভবিষ্যতেও আমাদের এই বন্ধুত্ব/ভাইয়ের সম্পর্কটা যেন সবসময় এমনই থাকে।</p>
+
+            <p>আল্লাহ তোকে সুস্থ, সুন্দর ও সফল জীবন দান করুন। তোর জীবনের প্রতিটি নতুন বছর আগের বছরের চেয়েও সুন্দর হোক।</p>
+
+            <p class="highlight-text">আবারও বলছি—<br><strong>শুভ জন্মদিন, ভাই! 🎂❤️🌹</strong></p>
+
+            <p>সবসময় ভালো থাকিস, হাসিখুশি থাকিস এবং নিজের স্বপ্নের পেছনে ছুটতে থাকিস।</p>
+          </div>
+
+          <div class="letter-footer">
+            <p class="letter-signature">— তোর প্রিয় বন্ধু ❤️</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
