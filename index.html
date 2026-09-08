@@ -14,26 +14,21 @@
 </head>
 <body>
 
-  <!-- Floating Background Particles Canvas -->
+  <!-- Background Particle & Confetti Canvases -->
   <canvas id="particles-canvas"></canvas>
   <canvas id="confetti-canvas"></canvas>
 
-  <!-- Optional Unobtrusive Audio Control Button -->
-  <button id="music-toggle" class="music-toggle-btn hidden" aria-label="Toggle Music">
+  <!-- Floating Audio Control Button -->
+  <button id="music-toggle" class="music-toggle-btn hidden" aria-label="Toggle Music" title="Toggle Music">
     <span id="music-icon">🎵</span>
   </button>
-
-  <!-- Background Audio (Data URI synthesized gentle ambient tone to guarantee 100% offline static compatibility without 403s) -->
-  <audio id="bg-music" loop preload="auto">
-    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=" type="audio/wav">
-  </audio>
 
   <!-- MAIN APP CONTAINER -->
   <main id="app-container">
 
-    <!-- PAGE 1: OPEN SURPRISE -->
+    <!-- SCREEN 1: OPEN SURPRISE -->
     <section id="page-1" class="page-screen active">
-      <div class="screen-content">
+      <div class="screen-content flex-center">
         <button id="btn-open" class="btn-primary open-btn glow-effect">
           <span>OPEN</span>
           <div class="btn-sparkle"></div>
@@ -41,7 +36,7 @@
       </div>
     </section>
 
-    <!-- PAGE 2: YOU ARE MC -->
+    <!-- SCREEN 2: YOU ARE MC -->
     <section id="page-2" class="page-screen hidden">
       <div class="glass-card flex-center">
         <h1 class="heading-mc">You are MC</h1>
@@ -52,7 +47,7 @@
       </div>
     </section>
 
-    <!-- PAGE 3: PASSWORD -->
+    <!-- SCREEN 3: PASSWORD -->
     <section id="page-3" class="page-screen hidden">
       <div class="glass-card flex-center">
         <div class="lock-icon">🔐</div>
@@ -76,43 +71,50 @@
       </div>
     </section>
 
-    <!-- PAGE 4: BIRTHDAY REVEAL -->
+    <!-- SCREEN 4: BIRTHDAY REVEAL -->
     <section id="page-4" class="page-screen hidden">
       <div class="reveal-container flex-center">
         <div class="cake-badge">🎂✨</div>
         <h1 class="reveal-title glow-text">Happy Birthday Anik❤🌹</h1>
-        <p class="reveal-subtitle">A special surprise awaits you...</p>
+        <p class="reveal-subtitle">A special message for you...</p>
         <button id="btn-click-now" class="btn-primary pulse-btn bangla-font">
           ক্লিক নাও
         </button>
       </div>
     </section>
 
-    <!-- PAGE 5: BIRTHDAY LETTER -->
+    <!-- SCREEN 5: BIRTHDAY LETTER -->
     <section id="page-5" class="page-screen hidden">
       <div class="letter-wrapper">
         <article class="letter-card bangla-font">
           <div class="letter-header">
             <span class="letter-decoration">🌹✨</span>
-            <h2 class="letter-salutation">প্রিয় আনিক,</h2>
+            <h2 class="letter-salutation">প্রিয় আনিক, 🌹</h2>
           </div>
 
           <div class="letter-body">
-            <p>আজকের এই বিশেষ দিনে তোকে জানাই জন্মদিনের অনেক অনেক শুভেচ্ছা ও ভালোবাসা। ❤️</p>
+            <p>আজকের এই বিশেষ দিনে তোমাকে জানাই জন্মদিনের অনেক অনেক শুভেচ্ছা ও ভালোবাসা। ❤️</p>
 
-            <p>তোর জীবনের প্রতিটি দিন যেন আনন্দ, সফলতা আর সুন্দর মুহূর্তে ভরে ওঠে। তোর সব স্বপ্ন পূরণ হোক, জীবনের প্রতিটি পথে তুই সফল হোস এবং সবসময় হাসিখুশি থাকিস।</p>
+            <p>তোমার জীবনের প্রতিটি দিন যেন আনন্দ, সফলতা আর সুন্দর মুহূর্তে ভরে ওঠে। তোমার সব স্বপ্ন পূরণ হোক, জীবনের প্রতিটি পথে তুমি সফল হও এবং সবসময় হাসিখুশি থাকো।</p>
 
-            <p>তুই শুধু একজন বন্ধু না, তুই আমার কাছে ভাইয়ের মতো। জীবনের সুন্দর মুহূর্তগুলোতে যেমন পাশে ছিলি, তেমনি ভবিষ্যতেও আমাদের এই বন্ধুত্ব/ভাইয়ের সম্পর্কটা যেন সবসময় এমনই থাকে।</p>
+            <p>তুমি আমার এলাকার ছোট ভাই। তোমাকে ছোট ভাই হিসেবে সবসময় ভালো জায়গায় দেখতে চাই। জীবনে অনেক দূর এগিয়ে যাও, নিজের স্বপ্নগুলো পূরণ করো এবং একজন ভালো মানুষ হিসেবে নিজেকে গড়ে তোলো।</p>
 
-            <p>আল্লাহ তোকে সুস্থ, সুন্দর ও সফল জীবন দান করুন। তোর জীবনের প্রতিটি নতুন বছর আগের বছরের চেয়েও সুন্দর হোক।</p>
+            <p>জীবনে যত বাধাই আসুক, কখনো হাল ছেড়ে দিও না। নিজের প্রতি বিশ্বাস রাখো এবং সবসময় সামনে এগিয়ে যাও। বড় ভাই হিসেবে তোমার জন্য সবসময় আমার দোয়া ও শুভকামনা থাকবে। ❤️</p>
 
-            <p class="highlight-text">আবারও বলছি—<br><strong>শুভ জন্মদিন, ভাই! 🎂❤️🌹</strong></p>
+            <p>আল্লাহ তোমাকে সুস্থ, সুন্দর ও সফল জীবন দান করুন। তোমার জীবনের প্রতিটি নতুন বছর যেন আগের বছরের চেয়েও সুন্দর হয়। 🌹</p>
 
-            <p>সবসময় ভালো থাকিস, হাসিখুশি থাকিস এবং নিজের স্বপ্নের পেছনে ছুটতে থাকিস।</p>
+            <div class="letter-highlight">
+              <p class="highlight-title">আবারও বলছি—</p>
+              <h3 class="highlight-wishes">শুভ জন্মদিন, আনিক! 🎂❤️🌹</h3>
+            </div>
+
+            <p>ভালো থেকো, হাসিখুশি থেকো এবং জীবনে অনেক বড় হও।</p>
+
+            <p>তোমার জন্য রইল অনেক অনেক দোয়া ও শুভকামনা। ❤️</p>
           </div>
 
           <div class="letter-footer">
-            <p class="letter-signature">— তোর প্রিয় বন্ধু ❤️</p>
+            <p class="letter-signature">— তোমার বড় ভাই ❤️</p>
           </div>
         </article>
       </div>
