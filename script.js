@@ -6,22 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- DOM Elements ---
   const page1 = document.getElementById('page-1');
   const page2 = document.getElementById('page-2');
-  const page3 = document.getElementById('page-3');
   const page4 = document.getElementById('page-4');
   const page5 = document.getElementById('page-5');
 
   const btnOpen = document.getElementById('btn-open');
   const btnNo = document.getElementById('btn-no');
   const btnYes = document.getElementById('btn-yes');
-  const passwordForm = document.getElementById('password-form');
-  const passwordInput = document.getElementById('password-input');
-  const passwordError = document.getElementById('password-error');
   const btnClickNow = document.getElementById('btn-click-now');
 
   const musicToggle = document.getElementById('music-toggle');
   const musicIcon = document.getElementById('music-icon');
-
-  const CORRECT_PASSWORD = '0894';
 
   // --- Page Navigation Helper ---
   function goToPage(fromPage, toPage) {
@@ -138,31 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Absolutely nothing happens
   });
 
-  // Screen 2: YES button -> Screen 3
+  // Screen 2: YES button -> Screen 4 (Birthday Reveal)
   btnYes.addEventListener('click', () => {
-    goToPage(page2, page3);
-    setTimeout(() => {
-      passwordInput.focus();
-    }, 350);
-  });
-
-  // Screen 3: Password verification
-  passwordForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const entered = passwordInput.value.trim();
-
-    if (entered === CORRECT_PASSWORD) {
-      passwordError.classList.add('hidden');
-      goToPage(page3, page4);
-      triggerBirthdayConfetti();
-    } else {
-      passwordError.classList.remove('hidden');
-      passwordError.style.animation = 'none';
-      passwordError.offsetHeight; // Reflow
-      passwordError.style.animation = 'shake 0.4s ease-in-out';
-      passwordInput.value = '';
-      passwordInput.focus();
-    }
+    goToPage(page2, page4);
+    triggerBirthdayConfetti();
   });
 
   // Screen 4 -> Screen 5

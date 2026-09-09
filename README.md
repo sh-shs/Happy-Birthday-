@@ -8,9 +8,8 @@ Hosted on GitHub Pages.
 
 - **Page 1 (Open Surprise 🎁):** Beautiful animated background with soft glowing effects, floating hearts/stars, and a prominent "OPEN" button.
 - **Page 2 ("You are MC"):** Interactive question screen with "NO" and "YES" buttons.
-- **Page 3 (Password Screen 🔐):** Secure code entry screen requiring key `0894`.
-- **Page 4 (Birthday Reveal 🎂❤️):** Full-screen reveal with "Happy Birthday Anik❤🌹", floating roses, hearts, animated canvas confetti, and "ক্লিক নাও" button.
-- **Page 5 (Birthday Letter 💌):** Heartfelt personal birthday letter written in Bangla presented on an elegant card with soft glowing decorations.
+- **Page 3 (Birthday Reveal 🎂❤️):** Full-screen reveal with "Happy Birthday Anik❤🌹", floating roses, hearts, animated canvas confetti, and "ক্লিক নাও" button.
+- **Page 4 (Birthday Letter 💌):** Heartfelt personal birthday letter written in Bangla presented on an elegant card with soft glowing decorations.
 
 ## Tech Stack
 
