@@ -221,7 +221,7 @@ html, body {
   text-transform: uppercase;
 }
 
-/* --- Glass Card Containers (Screens 2 & 3) --- */
+/* --- Glass Card Container (Screen 2) --- */
 .glass-card {
   background: var(--glass-bg);
   backdrop-filter: blur(18px);
@@ -257,76 +257,6 @@ html, body {
 .btn-group button {
   flex: 1;
   max-width: 140px;
-}
-
-/* --- SCREEN 3: PASSWORD --- */
-.lock-icon {
-  font-size: 3.2rem;
-  margin-bottom: 12px;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-}
-
-.heading-sub {
-  font-size: 1.55rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: var(--text-dim);
-}
-
-#password-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.input-wrapper {
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-#password-input {
-  width: 100%;
-  padding: 16px 20px;
-  font-size: 1.6rem;
-  letter-spacing: 8px;
-  text-align: center;
-  border-radius: 16px;
-  border: 2px solid var(--glass-border);
-  background: rgba(0, 0, 0, 0.3);
-  color: #fff;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-#password-input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 18px var(--primary-glow);
-  background: rgba(0, 0, 0, 0.45);
-}
-
-#password-input::placeholder {
-  letter-spacing: 4px;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.error-msg {
-  color: #ff4d6d;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  animation: shake 0.4s ease-in-out;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
-}
-
-#btn-password-submit {
-  width: 100%;
-  padding: 16px;
 }
 
 /* --- SCREEN 4: BIRTHDAY REVEAL --- */
@@ -519,11 +449,6 @@ html, body {
   .btn-primary, .btn-secondary {
     padding: 14px 30px;
     font-size: 1.1rem;
-  }
-
-  #password-input {
-    font-size: 1.35rem;
-    padding: 14px;
   }
 
   .letter-card {
